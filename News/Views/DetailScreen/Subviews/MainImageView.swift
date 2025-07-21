@@ -9,8 +9,10 @@ import SwiftUI
 
 struct MainImageView: View {
     
+    // MARK: - Properties
     let article: Article
     
+    // MARK: - Body
     var body: some View {
         GeometryReader { reader in
             if let url = article.urlToImage, let imageURL = URL(string: url) {

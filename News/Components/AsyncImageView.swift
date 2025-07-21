@@ -1,33 +1,34 @@
 //
-//  BottomArticleNews.swift
+//  AsyncImageView.swift
 //  News
 //
-//  Created by Жанна Сергеевна  on 20/07/25.
+//  Created by Жанна Сергеевна  on 21/07/25.
 //
 
 import SwiftUI
 
-struct BottomArticleNews: View {
+struct AsyncImageView: View {
     
     // MARK: - Properties
     let article: Article
+    let imageHeight: CGFloat
+    let imageWidtht: CGFloat
+    let placeholder: CGFloat
     
     // MARK: - Body
     var body: some View {
-        VStack {
-        
         if let url = article.urlToImage, let imageURL = URL(string: url) {
             AsyncImage(url: imageURL) { phase in
                 if let image = phase.image {
                     image
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 120, height: 120)
+                        .frame(width: imageWidtht, height: imageHeight)
                         .cornerRadius(10)
                 } else {
                     ZStack {
                         Rectangle()
-                            .frame(width: 120, height: 120)
+                            .frame(width: placeholder, height: placeholder)
                             .foregroundStyle(.secondary)
                             .opacity(0.3)
                             .cornerRadius(10)
@@ -41,19 +42,5 @@ struct BottomArticleNews: View {
                 }
             }
         }
-        
-        VStack(alignment: .leading) {
-            Text(article.title)
-                .titleFont()
-            
-            Spacer()
-            
-            Text(article.publishedAt.converterDate()).descriptionFont()
-        }
-    }
-        .frame(width: 120, height: 240)
-        .padding(10)
-        .background(.background)
-        .cornerRadius(10)
     }
 }
